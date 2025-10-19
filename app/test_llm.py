@@ -1,13 +1,8 @@
-
-
 import pytest
 import pandas as pd
-import re
 from llm_integration import call_llm_for_viz, clean_llm_code
 from helpers import extract_column_from_answer, summary_statistics
 from main import execute_viz_code
-import matplotlib.pyplot as plt
-import seaborn as sns
 
 # Mock DataFrame for testing
 TEST_DF = pd.DataFrame({

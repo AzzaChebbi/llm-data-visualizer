@@ -3,7 +3,6 @@ import anthropic
 import logging
 import pandas as pd
 import re
-import json
 from dotenv import load_dotenv
 
 # Load environment variables
@@ -31,7 +30,7 @@ def extract_visualizations(response_text):
     for i in range(len(viz_pattern)):
         visualizations.append({
             "code": viz_pattern[i].strip(),
-            "interpretation": interp_pattern[i].strip() if i < len(interp_pattern) else "Pas d'interprétation disponible."
+            "interpretation": interp_pattern[i].strip() if i < len(interp_pattern) else "No interpretation available."
         })
 
     return visualizations
@@ -67,7 +66,7 @@ def call_llm_for_viz(data: pd.DataFrame, user_request: str) -> list:
 
     if data.empty:
         return [{"code": "# Error: The dataset is empty or has no usable columns.", 
-                 "interpretation": "Le dataset fourni est vide ou ne contient pas de colonnes utilisables."}]
+                 "interpretation": "The provided dataset is empty or does not contain usable columns."}]
 
     # Convert datetime columns to numeric for summary statistics
     for col in data.select_dtypes(include=["datetime64"]).columns:
